@@ -4,12 +4,21 @@ from contextlib import closing
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Query, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from database import get_db, init_db
 from models import Task, TaskCreate, TaskPriority, TaskStatus, TaskUpdate
 
 app = FastAPI(title="Task Manager API")
+
+# Serve static frontend
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+@app.get("/")
+def root() -> FileResponse:
+    return FileResponse("static/index.html")
 
 
 @app.on_event("startup")

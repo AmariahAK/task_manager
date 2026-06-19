@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header__inner container">
+      <h1 class="header__title">Task Manager</h1>
+      <button class="btn btn--primary" id="btn-new-task">+ New Task</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Filter Bar -->
+    <div class="filters" id="filters">
+      <div class="filters__group">
+        <label class="filter__label">
+          Status
+          <select class="filter__select" id="filter-status">
+            <option value="">All</option>
+            <option value="todo">Todo</option>
+            <option value="in_progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </label>
+        <label class="filter__label">
+          Priority
+          <select class="filter__select" id="filter-priority">
+            <option value="">All</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+        <button class="btn btn--ghost btn--sm" id="btn-clear-filters">Clear</button>
+      </div>
+      <p class="filters__count" id="task-count"></p>
+    </div>
+
+    <!-- Task List -->
+    <div class="task-list" id="task-list"></div>
+
+    <!-- Empty State -->
+    <div class="empty-state hidden" id="empty-state">
+      <div class="empty-state__icon">&#128203;</div>
+      <h2 class="empty-state__title">No tasks yet</h2>
+      <p class="empty-state__text">Create your first task and start organizing.</p>
+      <button class="btn btn--primary" id="btn-empty-create">+ New Task</button>
+    </div>
+
+    <!-- Loading State -->
+    <div class="task-list hidden" id="loading-state">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+  </main>
+
+  <!-- Modal (hidden by default) -->
+  <div class="modal hidden" id="modal">
+    <div class="modal__backdrop" id="modal-backdrop"></div>
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modal-title">New Task</h2>
+        <button class="modal__close" id="modal-close">&times;</button>
+      </div>
+      <form id="task-form" novalidate>
+        <input type="hidden" id="form-id">
+        <div class="form__group">
+          <label class="form__label" for="form-title">Title <span class="form__required">*</span></label>
+          <input class="form__input" type="text" id="form-title" placeholder="What needs to be done?" required minlength="1">
+          <p class="form__error hidden" id="error-title">Title is required.</p>
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="form-desc">Description</label>
+          <textarea class="form__input form__textarea" id="form-desc" rows="3" placeholder="Add details (optional)"></textarea>
+        </div>
+        <div class="form__row">
+          <div class="form__group form__group--half">
+            <label class="form__label" for="form-status">Status</label>
+            <select class="form__input form__select" id="form-status">
+              <option value="todo">Todo</option>
+              <option value="in_progress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+          <div class="form__group form__group--half">
+            <label class="form__label" for="form-priority">Priority</label>
+            <select class="form__input form__select" id="form-priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+        <div class="form__actions">
+          <button type="button" class="btn btn--ghost" id="modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn--primary" id="form-submit">Create Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

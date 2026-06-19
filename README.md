@@ -30,8 +30,29 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-The API is live at **http://127.0.0.1:8000**.  
+The API is live at **http://127.0.0.1:8000**.
 Interactive docs: **http://127.0.0.1:8000/docs**
+
+## Web UI
+
+Visit **http://localhost:8000** in your browser — the app includes a built-in frontend:
+
+![Task Manager UI screenshot](screenshot.png)
+
+- **Task cards** with color-coded status and priority badges
+- **Filter bar** — filter by status or priority
+- **Create & Edit** tasks via modal forms with validation
+- **Delete** with inline confirmation
+- **Toast notifications** for all actions
+- **Responsive** layout (works on mobile)
+- **Zero dependencies** — vanilla HTML, CSS, and JavaScript
+
+| URL | What |
+|---|---|
+| http://localhost:8000 | **Web UI** — manage tasks visually |
+| http://localhost:8000/docs | Interactive API docs (Swagger) |
+| http://localhost:8000/redoc | Alternative API docs (ReDoc) |
+| http://localhost:8000/tasks | Raw JSON API |
 
 The SQLite database file (`tasks.db`) is created automatically on first startup.
 
@@ -82,6 +103,10 @@ curl -X POST http://127.0.0.1:8000/tasks \
 ├── main.py          # FastAPI app & endpoints
 ├── models.py        # Pydantic schemas (Task, TaskCreate, TaskUpdate)
 ├── database.py      # SQLite connection & init
+├── static/          # Frontend UI (HTML + CSS + JS)
+│   ├── index.html
+│   ├── styles.css
+│   └── app.js
 ├── requirements.txt # Dependencies
 └── tasks.db         # SQLite database (auto-generated)
 ```
@@ -89,4 +114,3 @@ curl -X POST http://127.0.0.1:8000/tasks \
 ## License
 
 MIT
-# task_manager
